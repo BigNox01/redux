@@ -13,8 +13,7 @@ import InfoOutlined from "@mui/icons-material/InfoOutlined";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
 
 
-export default function CreditCardForm() {
-
+export default function PopupCard({handleClosePopup}) {
   return (
     <Card
       variant="outlined"
@@ -56,7 +55,7 @@ export default function CreditCardForm() {
         </FormControl>
         <Checkbox label="Save card" sx={{ gridColumn: "1/-1", my: 1 }} />
         <CardActions sx={{ gridColumn: "1/-1" }}>
-          <Button variant="solid" color="primary">
+          <Button variant="solid" color="primary" onClick={handleClosePopup}>
             Add card
           </Button>
         </CardActions>

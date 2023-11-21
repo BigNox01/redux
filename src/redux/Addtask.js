@@ -1,8 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import Database from "../Database/Taskdatabase";
 
 export const AddTaskSlice= createSlice({
-    name:"add_a_task",
+    name:"addTask",
     initialState:{
         isPopupOpen: false,
     },

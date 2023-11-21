@@ -16,8 +16,9 @@ import KeyboardArrowDownRoundedIcon from "@mui/icons-material/KeyboardArrowDownR
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 import AddTask from "../buttons/logos/add-a-task";
 // adding the dispatch commands so that it receives the order of opening the popup card from redux
-import {useDispatch} from "react-redux";
-import { openPopup,closePopup } from "../redux/Addtask";
+import {useDispatch, useSelector} from "react-redux";
+import { openPopup,closePopup} from "../redux/Addtask";
+import PopupCard from "./Popupcard";
 
 export default function Navigation() {
   // added code to dispatch the actions to open the popup
@@ -25,6 +26,12 @@ export default function Navigation() {
   const handleAddTaskClick = () => {
     dispatch(openPopup());
   };
+  // get the state value
+  const isPopupOpen= useSelector((state)=>state.addTask.isPopupOpen)
+  // dispatch the action to close the popup
+  const handleClosePopup=()=>{
+    dispatch(closePopup());
+  } 
   return (
     <List size="sm" sx={{ "--ListItem-radius": "8px", "--List-gap": "4px" }}>
       <ListItem nested>
@@ -73,11 +80,13 @@ export default function Navigation() {
           </ListItem>
           <ListDivider />
           <ListItem>
-            <ListItemButton>
+            <ListItemButton onClick={handleAddTaskClick}>
               <AddTask />
               <ListItemContent>Add a task</ListItemContent>
             </ListItemButton>
           </ListItem>
+          {/* POPUP CARD*/}
+          {isPopupOpen && (<PopupCard handleClosePopup={handleClosePopup}></PopupCard>)}
         </List>
       </ListItem>
       <ListItem nested sx={{ mt: 2 }}>
