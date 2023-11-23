@@ -1,65 +1,44 @@
 import * as React from "react";
+import AspectRatio from "@mui/joy/AspectRatio";
 import Card from "@mui/joy/Card";
-import CardActions from "@mui/joy/CardActions";
 import CardContent from "@mui/joy/CardContent";
-import Checkbox from "@mui/joy/Checkbox";
+import CardOverflow from "@mui/joy/CardOverflow";
 import Divider from "@mui/joy/Divider";
-import FormControl from "@mui/joy/FormControl";
-import FormLabel from "@mui/joy/FormLabel";
-import Input from "@mui/joy/Input";
 import Typography from "@mui/joy/Typography";
-import Button from "@mui/joy/Button";
-import InfoOutlined from "@mui/icons-material/InfoOutlined";
-import CreditCardIcon from "@mui/icons-material/CreditCard";
+import InputField from "../buttons/logos/inputfield";
 
-
-export default function PopupCard({handleClosePopup}) {
-  return (
-    <Card
-      variant="outlined"
-      sx={{
-        maxHeight: "max-content",
-        maxWidth: "100%",
-        mx: "auto",
-        // to make the demo resizable
-        overflow: "auto",
-        resize: "horizontal",
-      }}
-    >
-      <Typography level="title-lg" startDecorator={<InfoOutlined />}>
-        Add new card
-      </Typography>
-      <Divider inset="none" />
-      <CardContent
-        sx={{
-          display: "grid",
-          gridTemplateColumns: "repeat(2, minmax(80px, 1fr))",
-          gap: 1.5,
-        }}
-      >
-        <FormControl sx={{ gridColumn: "1/-1" }}>
-          <FormLabel>Card number</FormLabel>
-          <Input endDecorator={<CreditCardIcon />} />
-        </FormControl>
-        <FormControl>
-          <FormLabel>Expiry date</FormLabel>
-          <Input endDecorator={<CreditCardIcon />} />
-        </FormControl>
-        <FormControl>
-          <FormLabel>CVC/CVV</FormLabel>
-          <Input endDecorator={<InfoOutlined />} />
-        </FormControl>
-        <FormControl sx={{ gridColumn: "1/-1" }}>
-          <FormLabel>Card holder name</FormLabel>
-          <Input placeholder="Enter cardholder's full name" />
-        </FormControl>
-        <Checkbox label="Save card" sx={{ gridColumn: "1/-1", my: 1 }} />
-        <CardActions sx={{ gridColumn: "1/-1" }}>
-          <Button variant="solid" color="primary" onClick={handleClosePopup}>
-            Add card
-          </Button>
-        </CardActions>
-      </CardContent>
-    </Card>
-  );
+export default function PopupCard({ handleClosePopup }) {
+ return (
+   <Card variant="outlined" sx={{ width: 320 }}>
+     <CardOverflow>
+       <AspectRatio ratio="2">
+         <img
+           src="https://images.unsplash.com/photo-1532614338840-ab30cf10ed36?auto=format&fit=crop&w=318"
+           srcSet="https://images.unsplash.com/photo-1532614338840-ab30cf10ed36?auto=format&fit=crop&w=318&dpr=2 2x"
+           loading="lazy"
+           alt=""
+         />
+       </AspectRatio>
+     </CardOverflow>
+     <CardContent>
+       <Typography level="title-md">
+        <InputField>
+        </InputField>
+       </Typography>
+       <Typography level="body-sm">California</Typography>
+     </CardContent>
+     <CardOverflow variant="soft" sx={{ bgcolor: "background.level1" }}>
+       <Divider inset="context" />
+       <CardContent orientation="horizontal">
+         <Typography level="body-xs" fontWeight="md" textColor="text.secondary">
+           Priority
+         </Typography>
+         <Divider orientation="vertical" />
+         <Typography level="body-xs" fontWeight="md" textColor="text.secondary">
+           Added:1 hour ago
+         </Typography>
+       </CardContent>
+     </CardOverflow>
+   </Card>
+ );
 }
