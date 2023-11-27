@@ -2,7 +2,6 @@ import * as React from "react";
 import Box from "@mui/joy/Box";
 import Button from "@mui/joy/Button";
 import Input from "@mui/joy/Input";
-import ListDivider from "@mui/joy/ListDivider";
 
 export default function InputField({handleAddTask}) {
 const [description, setDescription] = React.useState("");

@@ -37,7 +37,15 @@ export const ListAddedTasks = createSlice({
       // Instead of directly modifying state, create a new array:
       state.tasks = [...state.tasks];
     },
+    // Toggle completion status
+    ToggleCompletion: (state, action) => {
+      const { taskId } = action.payload;
+      const taskToUpdate = state.tasks.find((task) => task.id === taskId);
+      if (taskToUpdate) {
+        taskToUpdate.completed = !taskToUpdate.completed;
+      }
+    },
   },
 });
-export const {DescriptionAdded,EditTask,ToggleEdit}=ListAddedTasks.actions;
+export const {DescriptionAdded,EditTask,ToggleEdit,ToggleCompletion}=ListAddedTasks.actions;
 export default ListAddedTasks.reducer;

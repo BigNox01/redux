@@ -9,10 +9,12 @@ import CardContent from "@mui/joy/CardContent";
 import IconButton from "@mui/joy/IconButton";
 import Typography from "@mui/joy/Typography";
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
-import SwitchControlled from "../buttons/logos/switch";
-import { EditTask,ToggleEdit } from "../redux/listTask";
+import ButtonGroup from "@mui/joy/ButtonGroup";
+import Stack from "@mui/joy/Stack";
+import { EditTask,ToggleEdit,ToggleCompletion } from "../redux/listTask";
 
-export default function BasicCard({task}) {
+export default function BasicCard({cardData}) {
+
   const dispatch = useDispatch();
   // adding the functionality that edits the card description
   const handleEditClick=(taskId)=>{
@@ -37,6 +39,9 @@ const handleBlur = (taskId,event) => {
     clearTimeout(blurTimeout);
   };
   //***************************** */
+const handleCompleteButton = (taskId) => {
+  dispatch(ToggleCompletion({ taskId }));
+};
   const Tasks = useSelector((state) => state.ListTasks.tasks);
   return Tasks.map((task) => (
     <Card sx={{ width: 320 }} key={task.id}>
@@ -93,8 +98,21 @@ const handleBlur = (taskId,event) => {
         <div className="card-options">
           <CardContent orientation="horizontal">
             <div>
-              <Typography level="body-xs">Completed</Typography>
-              <SwitchControlled />
+              <Stack spacing={1} alignItems="center">
+                <ButtonGroup
+                  variant={task.completed ? "solid" : "outlined"}
+                  size="sm"
+                  color={task.completed ? "success":"danger"}
+                  aria-label="success button group"
+                >
+                  <Button
+                    checked={task.completed}
+                    onClick={() => handleCompleteButton(task.id)}
+                  >
+                    completed
+                  </Button>
+                </ButtonGroup>
+              </Stack>
             </div>
             <Button
               variant="solid"

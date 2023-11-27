@@ -1,7 +1,7 @@
 
 import './App.css';
-import BasicCard from './components/cards';
 import HorizontalList from './components/menubar';
+import SearchCompletedTask from './components/searchTasks';
 import SideList from './components/sidelist';
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
           <SideList />
         </div>
         <div className="main-components">
-          <BasicCard></BasicCard>
+          <SearchCompletedTask></SearchCompletedTask>
         </div>
       </div>
     </div>
