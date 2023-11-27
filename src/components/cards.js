@@ -18,7 +18,7 @@ export default function BasicCard({task}) {
   }
   const handleEditDescription=(taskId,newDescription)=>{
         dispatch(EditTask({ taskId, newDescription }));
-        dispatch(ToggleEdit({ taskId, isEditing: false }));
+        //the immediate closing of the input field was because of this line : dispatch(ToggleEdit({ taskId, isEditing: false }));
   }
   let blurTimeout
 const handleBlur = (taskId,event) => {
@@ -30,6 +30,7 @@ const handleBlur = (taskId,event) => {
   }
 };
 //********************************************************** */
+// prevents the input field from closing right away
   const handleFocus = () => {
     clearTimeout(blurTimeout);
   };
@@ -44,7 +45,7 @@ const handleBlur = (taskId,event) => {
             type="text"
             value={task.description}
             onChange={(e) => handleEditDescription(task.id, e.target.value)}
-            onBlur={() => handleBlur(task.id)}
+            onBlur={(e) => handleBlur(task.id,e)}
             onFocus={handleFocus}
             onKeyUp={(e) => {
               if (e.key === "Enter") {
