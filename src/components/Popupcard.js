@@ -6,8 +6,16 @@ import CardOverflow from "@mui/joy/CardOverflow";
 import Divider from "@mui/joy/Divider";
 import Typography from "@mui/joy/Typography";
 import InputField from "../buttons/logos/inputfield";
+import {useDispatch} from "react-redux";
+import { DescriptionAdded } from "../redux/listTask";
+
 
 export default function PopupCard({ handleClosePopup }) {
+  const dispatch=useDispatch();
+  const handleAddTask=(description)=>{
+    dispatch(DescriptionAdded({description}));
+    handleClosePopup();
+  }
  return (
    <Card variant="outlined" sx={{ width: 320 }}>
      <CardOverflow>
@@ -22,8 +30,7 @@ export default function PopupCard({ handleClosePopup }) {
      </CardOverflow>
      <CardContent>
        <Typography level="title-md">
-        <InputField>
-        </InputField>
+         <InputField handleAddTask={handleAddTask}></InputField>
        </Typography>
        <Typography level="body-sm">California</Typography>
      </CardContent>
@@ -34,9 +41,6 @@ export default function PopupCard({ handleClosePopup }) {
            Priority
          </Typography>
          <Divider orientation="vertical" />
-         <Typography level="body-xs" fontWeight="md" textColor="text.secondary">
-           Added:1 hour ago
-         </Typography>
        </CardContent>
      </CardOverflow>
    </Card>
