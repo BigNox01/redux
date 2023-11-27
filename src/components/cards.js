@@ -2,6 +2,8 @@ import * as React from "react";
 import AspectRatio from "@mui/joy/AspectRatio";
 import Button from "@mui/joy/Button";
 import Card from "@mui/joy/Card";
+import Input from "@mui/joy/Input";
+import Box from "@mui/joy/Box";
 import { useDispatch, useSelector } from "react-redux";
 import CardContent from "@mui/joy/CardContent";
 import IconButton from "@mui/joy/IconButton";
@@ -41,19 +43,29 @@ const handleBlur = (taskId,event) => {
       <div>
         {/*....................................*/}
         {task.isEditing ? (
-          <input
-            type="text"
-            value={task.description}
-            onChange={(e) => handleEditDescription(task.id, e.target.value)}
-            onBlur={(e) => handleBlur(task.id,e)}
-            onFocus={handleFocus}
-            onKeyUp={(e) => {
-              if (e.key === "Enter") {
-                handleEditDescription(task.id, e.target.value);
-                clearTimeout(blurTimeout); // Clear the timeout
-              }
+          <Box
+            sx={{
+              py: 1,
+              display: "grid",
+              gap: 1,
+              alignItems: "center",
+              flexWrap: "wrap",
             }}
-          />
+          >
+            <Input
+              type="text"
+              value={task.description}
+              onChange={(e) => handleEditDescription(task.id, e.target.value)}
+              onBlur={(e) => handleBlur(task.id, e)}
+              onFocus={handleFocus}
+              onKeyUp={(e) => {
+                if (e.key === "Enter") {
+                  handleEditDescription(task.id, e.target.value);
+                  clearTimeout(blurTimeout); // Clear the timeout
+                }
+              }}
+            />
+          </Box>
         ) : (
           <Typography level="title-lg">{task.description}</Typography>
         )}
@@ -64,7 +76,7 @@ const handleBlur = (taskId,event) => {
           variant="plain"
           color="neutral"
           size="sm"
-          sx={{ position: "absolute", top: "0.875rem", right: "0.5rem" }}
+          sx={{ position: "absolute", top: "0.005rem", right: "0.5rem" }}
         >
           <DeleteRoundedIcon fontSize="small" />
         </IconButton>
