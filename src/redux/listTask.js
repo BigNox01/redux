@@ -45,7 +45,12 @@ export const ListAddedTasks = createSlice({
         taskToUpdate.completed = !taskToUpdate.completed;
       }
     },
+    // Set a flag to show completed tasks in the filtered data
+    ShowCompletedTasks: (state, action) => {
+      const { showCompleted } = action.payload;
+      state.showCompleted = showCompleted;
+    },
   },
 });
-export const {DescriptionAdded,EditTask,ToggleEdit,ToggleCompletion}=ListAddedTasks.actions;
+export const {DescriptionAdded,EditTask,ToggleEdit,ToggleCompletion,ShowCompletedTasks}=ListAddedTasks.actions;
 export default ListAddedTasks.reducer;

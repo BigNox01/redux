@@ -11,9 +11,9 @@ import Typography from "@mui/joy/Typography";
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 import ButtonGroup from "@mui/joy/ButtonGroup";
 import Stack from "@mui/joy/Stack";
-import { EditTask,ToggleEdit,ToggleCompletion } from "../redux/listTask";
+import { EditTask,ToggleEdit,ToggleCompletion,ShowCompletedTasks } from "../redux/listTask";
 
-export default function BasicCard({cardData}) {
+export default function BasicCard({cardData,completed}) {
 
   const dispatch = useDispatch();
   // adding the functionality that edits the card description
@@ -42,7 +42,13 @@ const handleBlur = (taskId,event) => {
 const handleCompleteButton = (taskId) => {
   dispatch(ToggleCompletion({ taskId }));
 };
-  const Tasks = useSelector((state) => state.ListTasks.tasks);
+const Tasks = useSelector((state) => {
+  if (state.ListTasks.showCompleted) {
+    return state.ListTasks.tasks.filter((task) => task.completed);
+  } else {
+    return state.ListTasks.tasks;
+  }
+});
   return Tasks.map((task) => (
     <Card sx={{ width: 320 }} key={task.id}>
       <div>
@@ -102,7 +108,7 @@ const handleCompleteButton = (taskId) => {
                 <ButtonGroup
                   variant={task.completed ? "solid" : "outlined"}
                   size="sm"
-                  color={task.completed ? "success":"danger"}
+                  color={task.completed ? "success" : "danger"}
                   aria-label="success button group"
                 >
                   <Button

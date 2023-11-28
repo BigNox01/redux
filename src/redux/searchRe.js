@@ -11,7 +11,12 @@ export const searchSlice = createSlice({
       state.searchInput = action.payload;
     },
     setFilteredData(state, action) {
-      state.filteredData = action.payload;
+        const { data, showCompleted } = action.payload;
+        if (showCompleted) {
+          state.filteredData = data.filter((task) => task.completed);
+        } else {
+          state.filteredData = data.filter((task) => !task.completed);
+        }
     },
   },
 });
